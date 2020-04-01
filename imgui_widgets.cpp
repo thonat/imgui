@@ -5747,9 +5747,9 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
     if (pressed && (window->Flags & ImGuiWindowFlags_Popup) && !(flags & ImGuiSelectableFlags_DontClosePopups) && !(window->DC.ItemFlags & ImGuiItemFlags_SelectableDontClosePopup))
         CloseCurrentPopup();
 
+    // Users of BeginMultiSelect() scope: call ImGui::IsItemToggledSelection() to retrieve selection toggle. Selectable() returns a pressed state!
     IMGUI_TEST_ENGINE_ITEM_INFO(id, label, window->DC.ItemFlags);
-
-    return pressed || (was_selected != selected);
+    return pressed;
 }
 
 bool ImGui::Selectable(const char* label, bool* p_selected, ImGuiSelectableFlags flags, const ImVec2& size_arg)
